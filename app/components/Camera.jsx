@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Button, Image, StyleSheet, Text } from 'react-native';
 import { Camera } from 'expo-camera';
 
@@ -7,10 +7,12 @@ export default function CameraExample() {
   const [photo, setPhoto] = useState(null);
   const cameraRef = useRef(null);
 
-  const requestPermission = async () => {
-    const { status } = await Camera.requestPermissionsAsync();
-    setHasPermission(status === 'granted');
-  };
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
 
   const takePhoto = async () => {
     if (cameraRef.current) {
@@ -18,10 +20,6 @@ export default function CameraExample() {
       setPhoto(result.uri);
     }
   };
-
-  React.useEffect(() => {
-    requestPermission();
-  }, []);
 
   if (hasPermission === null) {
     return <Text>Solicitando permiso para acceder a la cámara...</Text>;

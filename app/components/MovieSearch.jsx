@@ -29,6 +29,7 @@ export default function MovieSearch() {
         style={styles.input}
         placeholder="Ingresa el nombre de una película"
         onChangeText={setSearchText}
+        value={searchText}
       />
       <Button title="Buscar" onPress={fetchMovie} />
       {movie && (

@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    padding: 20,
   },
   countText: {
     fontSize: 20,
